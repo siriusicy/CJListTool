@@ -1,0 +1,38 @@
+PODS:
+  - CHTCollectionViewWaterfallLayout/ObjC (0.9.10)
+  - Masonry (1.1.0)
+  - MJRefresh (3.7.5)
+  - ReactiveCocoa (2.5):
+    - ReactiveCocoa/UI (= 2.5)
+  - ReactiveCocoa/Core (2.5):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.5)
+  - ReactiveCocoa/UI (2.5):
+    - ReactiveCocoa/Core
+  - YYModel (1.0.4)
+
+DEPENDENCIES:
+  - CHTCollectionViewWaterfallLayout/ObjC
+  - Masonry
+  - MJRefresh
+  - ReactiveCocoa (= 2.5)
+  - YYModel
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - CHTCollectionViewWaterfallLayout
+    - Masonry
+    - MJRefresh
+    - ReactiveCocoa
+    - YYModel
+
+SPEC CHECKSUMS:
+  CHTCollectionViewWaterfallLayout: b989a459788d7657ac010e03bc0f7eedca95a420
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+
+PODFILE CHECKSUM: c6f8d17a49bc43bdc21a20a15ffcaef9fe1f6acd
+
+COCOAPODS: 1.11.3
