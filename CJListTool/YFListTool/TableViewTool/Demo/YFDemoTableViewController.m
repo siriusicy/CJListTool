@@ -14,7 +14,14 @@
 #import "YFDemoTableCell_1.h"
 #import "YFDemoTableCell_2.h"
 
-@interface YFDemoTableViewController () <YFMVVMTableViewToolDelegate, YFDemoTableCell_1Protocol>
+///空白页
+#import "UIScrollView+YFEmpty.h"
+
+
+@interface YFDemoTableViewController () <
+YFMVVMTableViewToolDelegate, YFDemoTableCell_1Protocol,
+DZNEmptyDataSetDelegate, DZNEmptyDataSetSource ///< 如果需要空白页的话遵守协议
+>
 
 @property (nonatomic, strong) YFMVVMTableViewTool *tableViewTool;
 @property (nonatomic, strong) YFDemoTableViewModel *viewModel;
@@ -42,13 +49,18 @@
         @strongobj(self);
         //DoSomeThing
         
+        ///如果需要空白页的话
+        if ([x isKindOfClass:[NSNumber class]]) {
+            self.tableViewTool.tableView.isError = [(NSNumber *)x boolValue];
+        }
+        
     }];
     ///加载数据
     [self.viewModel yf_loadDataWithRefresh:YES];
 }
 
 #pragma mark -  YFDemoTableCell_1Protocol
-
+///cell的代理方法
 - (void)demoTableCell_1:(YFDemoTableCell_1 *)cell testAction:(NSInteger)testNumber {
     NSLog(@"YFDemoTableCell_1 testNumber: %zd",testNumber);
 }
@@ -57,34 +69,38 @@
 
 - (void)tableView:(UITableView *_Nullable)tableView willDisplayCell:(UITableViewCell<YFTableCellProtocol> *_Nullable)cell indexPath:(NSIndexPath *_Nullable)indexPath {
     
+    // DoSomeThing if need
     if ([cell isKindOfClass:[YFDemoTableCell_1 class]]) {
         YFDemoTableCell_1 *realCell = (YFDemoTableCell_1 *)cell;
 
     } else if ([cell isKindOfClass:[YFDemoTableCell_2 class]]) {
         YFDemoTableCell_2 *realCell = (YFDemoTableCell_2 *)cell;
 //        cell.block = ^ { };
-        realCell.showBottomLine = YES;
-        realCell.bottomLineHeight = 3;
-        realCell.bottomLineLeft = 10;
-        realCell.bottomLineRight = 20;
-        realCell.bottomLineColor = [UIColor blackColor];
     }
     
 }
 
 - (void)tableView:(UITableView *_Nullable)tableView didSelectCellViewModel:(id<YFTableCellVMProtocol> _Nullable)cellViewModel indexPath:(NSIndexPath *_Nullable)indexPath {
     
-    // DoSomeThing
+    // DoSomeThing if need
     if ([cellViewModel isKindOfClass:[YFDemoTableCell_1ViewModel class]]) {
         YFDemoTableCell_1ViewModel *viewModel = (YFDemoTableCell_1ViewModel *)cellViewModel;
-        UIViewController *vc = nil;
-        [self.navigationController pushViewController:vc animated:YES];
+//        UIViewController *vc = nil;
+//        [self.navigationController pushViewController:vc animated:YES];
     } else if ([cellViewModel isKindOfClass:[YFDemoTableCell_2ViewModel class]]) {
         YFDemoTableCell_2ViewModel *viewModel = (YFDemoTableCell_2ViewModel *)cellViewModel;
-        UIViewController *vc = nil;
-        [self.navigationController pushViewController:vc animated:YES];
+//        UIViewController *vc = nil;
+//        [self.navigationController pushViewController:vc animated:YES];
     }
     
+}
+
+#pragma mark -  DZNEmptyDataSetDelegate
+///如果该页面的空白页需要自定义,在这里实现对应的代理方法,默认不需要实现,会有一个全局的样式
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view {
+    NSLog(@"空白页点击");
+    [self.viewModel yf_loadDataWithRefresh:YES];
 }
 
 #pragma mark -  set/get
@@ -93,6 +109,10 @@
     if (_tableViewTool == nil) {
         _tableViewTool = [[YFMVVMTableViewTool alloc] initWithViewModel:self.viewModel];
         _tableViewTool.delegate = self;
+        ///< 如果需要空白页的话遵守协议
+        _tableViewTool.tableView.emptyDataSetDelegate = self;
+        _tableViewTool.tableView.emptyDataSetSource = self;
+        
         _tableViewTool.tableView.backgroundColor = [UIColor whiteColor];
         
         ///绑定上下拉刷新
@@ -106,6 +126,7 @@
 - (YFDemoTableViewModel *)viewModel{
     if (_viewModel == nil) {
         _viewModel = [[YFDemoTableViewModel alloc] init];
+        ///设置cell的代理
         _viewModel.cellDelegate = self;
     }
     return _viewModel;

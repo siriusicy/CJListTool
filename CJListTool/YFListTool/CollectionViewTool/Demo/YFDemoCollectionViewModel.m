@@ -56,11 +56,9 @@
     for (int i=0; i<4; ++i) {
         
         YFDemoCollectionCell_1ViewModel *cellVM = [[YFDemoCollectionCell_1ViewModel alloc] initWithModel:nil];
-        YFCellBottomLineInfoModel *bottomLine = [[YFCellBottomLineInfoModel alloc] init];
-        bottomLine.bottomLineLeft = 10;
-        bottomLine.bottomLineRight = 20;
+        ///自定义cell bottomLine 如果有需要的话
+        YFCellBottomLineInfoModel *bottomLine = [YFCellBottomLineInfoModel yf_defaultBottomLine];
         bottomLine.bottomLineheight = 3;
-        bottomLine.bottomLineColor = [UIColor blackColor];
         cellVM.bottomLineInfo = bottomLine;
         [section1.listDataSource addObject:cellVM];
     }
@@ -92,22 +90,20 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
+        if (isRefresh) {
+            [self.dataArray removeAllObjects];
+        }
+        
         YFDemoCollectionCell_2ViewModel *cellVM = [[YFDemoCollectionCell_2ViewModel alloc] initWithModel:nil];
-
-        YFCellBottomLineInfoModel *bottomLine = [[YFCellBottomLineInfoModel alloc] init];
-        bottomLine.bottomLineLeft = 10;
-        bottomLine.bottomLineRight = 20;
-        bottomLine.bottomLineheight = 3;
-        bottomLine.bottomLineColor = [UIColor blackColor];
-        cellVM.bottomLineInfo = bottomLine;
-
+        cellVM.bottomLineInfo = [YFCellBottomLineInfoModel yf_defaultBottomLine];
         [self.dataArray addObject:cellVM];
         self.sectionDataSource = [self yf_packageSectionDataSource];
 //        self.noMoreData = YES;
+        BOOL isError = YES;
+        [self.requestCompleteSignal sendNext:@(isError)];
+        
         ///这个信号会reloadData
         [self.reloadSignal sendNext:nil];
-        ///
-        [self.requestCompleteSignal sendNext:nil];
     });
 }
 

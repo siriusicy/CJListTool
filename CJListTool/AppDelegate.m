@@ -6,6 +6,8 @@
 //
 
 #import "AppDelegate.h"
+#import "UIScrollView+YFEmpty.h"
+
 
 @interface AppDelegate ()
 
@@ -14,8 +16,28 @@
 @implementation AppDelegate
 
 
+///空白页默认配置
+- (void)setupEmptySet {
+    
+    [UIScrollView appearance].errorString = @"网络连接失败~";
+    [UIScrollView appearance].errorDescriptionString = nil;
+    [UIScrollView appearance].errorImage =  [UIImage imageNamed:@"empty_yaya"];
+
+    [UIScrollView appearance].emptyString = @"还什么都没有哦~";
+    [UIScrollView appearance].emptyDescriptionAttributedString = nil;
+    [UIScrollView appearance].emptyImage =  [UIImage imageNamed:@"empty_yaya"];
+    
+    [UIScrollView appearance].emptyDataSetBackgroundColor = [UIColor clearColor];
+}
+
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    
+    [self setupEmptySet];
+    
     return YES;
 }
 

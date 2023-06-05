@@ -14,8 +14,14 @@
 #import "YFDemoCollectionCell_1.h"
 #import "YFDemoCollectionCell_2.h"
 #import "UICollectionViewCell+BottomLine.h"
+///空白页
+#import "UIScrollView+YFEmpty.h"
 
-@interface YFDemoCollectionViewController () <YFMVVMCollectionViewToolDelegate , YFDemoCollectionCell_1Protocol>
+
+@interface YFDemoCollectionViewController () <
+YFMVVMCollectionViewToolDelegate , YFDemoCollectionCell_1Protocol,
+DZNEmptyDataSetDelegate, DZNEmptyDataSetSource ///< 如果需要空白页的话遵守协议
+>
 
 @property (nonatomic, strong) YFMVVMCollectionViewTool *collectionViewTool;
 @property (nonatomic, strong) YFDemoCollectionViewModel *viewModel;
@@ -47,13 +53,18 @@
         @strongobj(self);
         //DoSomeThing
         
+        ///如果需要空白页的话
+        if ([x isKindOfClass:[NSNumber class]]) {
+            self.collectionViewTool.collectionView.isError = [(NSNumber *)x boolValue];
+        }
+        
     }];
     ///加载数据
     [self.viewModel yf_loadDataWithRefresh:YES];
 }
 
 #pragma mark -  YFDemoCollectionCell_1Protocol
-
+///cell的代理方法
 - (void)demoCollectionCell_1:(YFDemoCollectionCell_1 *)cell testAction:(NSInteger)testNumber {
     NSLog(@"YFDemoCollectionCell_1 testNumber: %zd",testNumber);
 }
@@ -64,19 +75,11 @@
     
     if ([cell isKindOfClass:[YFDemoCollectionCell_1 class]]) {
         YFDemoCollectionCell_1 *realCell = (YFDemoCollectionCell_1 *)cell;
-        
 
-        
-//        cell.delegate = self;
     } else if ([cell isKindOfClass:[YFDemoCollectionCell_2 class]]) {
         YFDemoCollectionCell_2 *realCell = (YFDemoCollectionCell_2 *)cell;
 //        cell.block = ^ { };
-        realCell.showBottomLine = YES;
-        realCell.bottomLineHeight = 2;
-        realCell.bottomLineLeft = 20;
-        realCell.bottomLineRight = 30;
-        realCell.bottomLineColor = [UIColor blackColor];
-        
+
     }
     
 }
@@ -86,14 +89,22 @@
     // DoSomeThing
     if ([cellViewModel isKindOfClass:[YFDemoCollectionCell_1ViewModel class]]) {
         YFDemoCollectionCell_1ViewModel *viewModel = (YFDemoCollectionCell_1ViewModel *)cellViewModel;
-        UIViewController *vc = nil;
-        [self.navigationController pushViewController:vc animated:YES];
+//        UIViewController *vc = nil;
+//        [self.navigationController pushViewController:vc animated:YES];
     } else if ([cellViewModel isKindOfClass:[YFDemoCollectionCell_2ViewModel class]]) {
         YFDemoCollectionCell_2ViewModel *viewModel = (YFDemoCollectionCell_2ViewModel *)cellViewModel;
-        UIViewController *vc = nil;
-        [self.navigationController pushViewController:vc animated:YES];
+//        UIViewController *vc = nil;
+//        [self.navigationController pushViewController:vc animated:YES];
     }
     
+}
+
+#pragma mark -  DZNEmptyDataSetDelegate
+///如果该页面的空白页需要自定义,在这里实现对应的代理方法,默认不需要实现,会有一个全局的样式
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view {
+    NSLog(@"空白页点击");
+    [self.viewModel yf_loadDataWithRefresh:YES];
 }
 
 #pragma mark -  set/get
@@ -112,6 +123,9 @@
         
         
         _collectionViewTool.delegate = self;
+        ///< 如果需要空白页的话遵守协议
+        _collectionViewTool.collectionView.emptyDataSetDelegate = self;
+        _collectionViewTool.collectionView.emptyDataSetSource = self;
         _collectionViewTool.collectionView.backgroundColor = [UIColor whiteColor];
         
         ///绑定上下拉刷新
@@ -125,6 +139,7 @@
 - (YFDemoCollectionViewModel *)viewModel{
     if (_viewModel == nil) {
         _viewModel = [[YFDemoCollectionViewModel alloc] init];
+        ///设置cell的代理
         _viewModel.cellDelegate = self;
     }
     return _viewModel;

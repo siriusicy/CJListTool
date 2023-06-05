@@ -17,6 +17,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,copy) UIColor *bottomLineColor; ///< [UIColor grayColor]
 @property (nonatomic ,assign) CGFloat bottomLineheight; ///< default 1px
 
+
++ (YFCellBottomLineInfoModel *)yf_defaultBottomLine;
+
++ (YFCellBottomLineInfoModel *)yf_cellBottomLineWithLeft:(CGFloat)bottomLineLeft
+                                                   right:(CGFloat)bottomLineRight
+                                                   color:(UIColor *)bottomLineColor;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

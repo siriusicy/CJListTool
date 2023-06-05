@@ -11,13 +11,28 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.showBottomLine = YES;
-        self.bottomLineLeft = 0;
-        self.bottomLineRight = 0;
-        self.bottomLineheight = 1;
-        self.bottomLineColor = [UIColor grayColor];
+        _showBottomLine = YES;
+        _bottomLineLeft = 0;
+        _bottomLineRight = 0;
+        _bottomLineheight = 1;
+        _bottomLineColor = [UIColor grayColor];
     }
     return self;
+}
+
+
++ (YFCellBottomLineInfoModel *)yf_defaultBottomLine {
+    return [[YFCellBottomLineInfoModel alloc] init];
+}
+
++ (YFCellBottomLineInfoModel *)yf_cellBottomLineWithLeft:(CGFloat)bottomLineLeft
+                                                   right:(CGFloat)bottomLineRight
+                                                   color:(UIColor *)bottomLineColor {
+    YFCellBottomLineInfoModel *model = [self yf_defaultBottomLine];
+    model.bottomLineLeft = bottomLineLeft;
+    model.bottomLineRight = bottomLineRight;
+    model.bottomLineColor = bottomLineColor;
+    return model;
 }
 
 @end
