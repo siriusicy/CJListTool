@@ -7,28 +7,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CHTCollectionViewLayoutAttributes : UICollectionViewLayoutAttributes
-@property (nonatomic, strong) UIColor *color;
-@end
-
 @interface CHTCollectionViewDecorLayoutAttributes : UICollectionViewLayoutAttributes
 @property (nonatomic, strong) UIView *view;
 @end
 
 @interface CHTCollectionDecorReusableView : UICollectionReusableView
 @end
-
-@interface CHTCollectionReusableView : UICollectionReusableView
-
-@end
-
-
-///支持的背景样式,默认是颜色
-typedef NS_ENUM(NSUInteger, CHTCollectionViewSectionBgType) {
-    CHTCollectionViewSectionBgType_Color = 0, ///<
-    CHTCollectionViewSectionBgType_View, ///<
-};
-
 
 /**
  *  Enumerated structure to define direction in which items can be rendered.
@@ -78,10 +62,6 @@ extern NSString *const CHTCollectionElementKindSectionFooter;
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @optional
-///分区背景色 默认白色.
-- (UIColor *)collectionView:(UICollectionView *)collectionView
-                     layout:(UICollectionViewLayout *)collectionViewLayout
-backgroundColorForSectionAt:(NSInteger)section;
 
 ///分区背景视图 默认为空.
 - (UIView *)collectionView:(UICollectionView *)collectionView
@@ -258,8 +238,8 @@ backgroundViewForSectionAt:(NSInteger)section;
  */
 @interface CHTCollectionViewWaterfallLayout : UICollectionViewLayout
 
-///section背景样式
-@property (nonatomic, assign) CHTCollectionViewSectionBgType sectionBgType;
+///是否支持section背景样式,默认NO
+@property (nonatomic, assign) BOOL shouldSupportSectionBgView;
 
 
 /**

@@ -7,37 +7,8 @@
 
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "tgmath.h"
-static NSString *kDecorationReuseIdentifier = @"section_background";
+
 static NSString *kDecorationViewReuseIdentifier = @"section_backgroundView";
-
-@implementation CHTCollectionViewLayoutAttributes
-+ (UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString *)decorationViewKind withIndexPath:(NSIndexPath *)indexPath {
-    
-    CHTCollectionViewLayoutAttributes *layoutAttributes = [super layoutAttributesForDecorationViewOfKind:decorationViewKind withIndexPath:indexPath];
-    
-    layoutAttributes.color = [UIColor whiteColor];
-    
-    return layoutAttributes;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    CHTCollectionViewLayoutAttributes *newAttributes = [super copyWithZone:zone];
-    newAttributes.color = [self.color copyWithZone:zone];
-    return newAttributes;
-}
-
-@end
-
-@implementation CHTCollectionReusableView
-
-- (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
-    [super applyLayoutAttributes:layoutAttributes];
-    
-    CHTCollectionViewLayoutAttributes *ecLayoutAttributes = (CHTCollectionViewLayoutAttributes*)layoutAttributes;
-    self.backgroundColor = ecLayoutAttributes.color;
-}
-
-@end
 
 @implementation CHTCollectionViewDecorLayoutAttributes
 
@@ -96,11 +67,6 @@ static CGFloat CHTFloorCGFloat(CGFloat value) {
     CGFloat scale = [UIScreen mainScreen].scale;
     return floor(value * scale) / scale;
 }
-+ (Class)layoutAttributesClass
-{
-    return [CHTCollectionViewLayoutAttributes class];
-}
-
 
 #pragma mark - Public Accessors
 - (void)setColumnCount:(NSInteger)columnCount {
@@ -257,7 +223,6 @@ static CGFloat CHTFloorCGFloat(CGFloat value) {
     _footerInset  = UIEdgeInsetsZero;
     _itemRenderDirection = CHTCollectionViewWaterfallLayoutItemRenderDirectionShortestFirst;
 
-    [self registerClass:[CHTCollectionReusableView class] forDecorationViewOfKind:kDecorationReuseIdentifier];
     [self registerClass:[CHTCollectionDecorReusableView class] forDecorationViewOfKind:kDecorationViewReuseIdentifier];
     
 }
@@ -403,29 +368,10 @@ static CGFloat CHTFloorCGFloat(CGFloat value) {
             [self.allItemAttributes addObject:attributes];
             self.columnHeights[section][columnIndex] = @(CGRectGetMaxY(attributes.frame) + minimumInteritemSpacing);
         
-        
-            ///section背景色
-            if (self.sectionBgType == CHTCollectionViewSectionBgType_Color) {
-                CHTCollectionViewLayoutAttributes *decorationAttributes =
-                [CHTCollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:kDecorationReuseIdentifier withIndexPath:indexPath];
-
-                decorationAttributes.frame = CGRectMake(xOffset-sectionInset.left,
-                                                        yOffset-sectionInset.top,
-                                                        self.collectionViewContentSize.width,
-                                                        itemHeight+sectionInset.top+sectionInset.bottom);
-                if ([self.delegate respondsToSelector:@selector(collectionView:layout:backgroundColorForSectionAt:)]) {
-                    decorationAttributes.color = [self.delegate collectionView:self.collectionView layout:self backgroundColorForSectionAt:section];
-                } else {
-                    decorationAttributes.color = [UIColor whiteColor];
-                }
-                decorationAttributes.zIndex = attributes.zIndex-1;
-                [self.allItemAttributes addObject:decorationAttributes];
-            }
-            
         }
         
         ///section背景View
-        if (self.sectionBgType == CHTCollectionViewSectionBgType_View) {
+        if (self.shouldSupportSectionBgView) {
             CHTCollectionViewDecorLayoutAttributes *decorationAttributes =
             [CHTCollectionViewDecorLayoutAttributes layoutAttributesForDecorationViewOfKind:kDecorationViewReuseIdentifier withIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
 
