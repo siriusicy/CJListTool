@@ -118,6 +118,9 @@ DZNEmptyDataSetDelegate, DZNEmptyDataSetSource ///< 如果需要空白页的话�
         CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
         layout.minimumColumnSpacing = 16 ;//同一行item之间的间距
         layout.minimumInteritemSpacing = 16; //
+        layout.shouldSupportSectionBgView = YES; ///< 支持section背景
+        
+        
         _collectionViewTool = [[YFMVVMCollectionViewTool alloc] initWithViewModel:self.viewModel layout:layout];
         
         

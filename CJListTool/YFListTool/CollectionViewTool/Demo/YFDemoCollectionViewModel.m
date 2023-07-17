@@ -6,6 +6,7 @@
 //
 
 #import "YFDemoCollectionViewModel.h"
+#import "CJDemoCommonHeader.h"
 
 #import "YFCollectionSectionViewModel.h"
 #import "YFDemoCollectionSectionFooterViewModel.h"
@@ -73,7 +74,8 @@
     section2.sectionHeaderViewModel = [[YFDemoCollectionSectionHeaderViewModel alloc] initWithModel:nil];
     ///footer
     section2.sectionFooterViewModel = [[YFDemoCollectionSectionFooterViewModel alloc] initWithModel:nil];
-
+    section2.sectionBackgroundView = [self sectionBgView];
+    
     section2.minimumLineSpacing = 30;
     section2.minimumInteritemSpacing = 10;
     
@@ -81,6 +83,32 @@
 
     [array addObject:section2];
     return array;
+}
+
+///section背景
+- (UIView *)sectionBgView {
+    
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor orangeColor];
+    view.layer.borderColor = [UIColor blackColor].CGColor;
+    view.layer.borderWidth = 5;
+    
+
+    UIView *subView = [[UIView alloc] init];
+    subView.backgroundColor = [UIColor yellowColor];
+    subView.layer.cornerRadius = 8;
+    subView.clipsToBounds = YES;
+
+    [view addSubview:subView];
+    [subView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(7);
+        make.left.mas_equalTo(10);
+        make.right.mas_equalTo(-10);
+        make.bottom.mas_equalTo(-15);
+    }];
+            
+    return view;
+
 }
 
 ///加载数据

@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat minimumInteritemSpacing; ///< 同一行item之间的间距
 @property (nonatomic, assign) CGFloat minimumColumnSpacing; ///
 @property (nonatomic, assign) NSInteger columnCount;
+@property (nonatomic, strong) UIView *sectionBackgroundView; ///< section背景
 
 @end
 

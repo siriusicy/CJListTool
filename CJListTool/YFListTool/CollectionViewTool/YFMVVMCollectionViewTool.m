@@ -251,6 +251,13 @@
     }
 }
 
+///section背景view
+- (UIView *)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout backgroundViewForSectionAt:(NSInteger)section {
+    
+    YFCollectionSectionViewModel *sectionVM = self.viewModel.sectionDataSource[section];
+    return sectionVM.sectionBackgroundView;
+}
+
 #pragma mark - public methods
 - (void)setViewModel:(id<YFCollectionVCViewModelProtocol>)viewModel {
     _viewModel = viewModel;
