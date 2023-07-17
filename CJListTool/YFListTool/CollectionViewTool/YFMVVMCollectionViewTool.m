@@ -9,7 +9,7 @@
 #import "CJDemoCommonHeader.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "UIScrollView+Refresh.h"
-#import <CHTCollectionViewWaterfallLayout/CHTCollectionViewWaterfallLayout.h>
+#import "CHTCollectionViewWaterfallLayout.h"
 #import "UICollectionViewCell+BottomLine.h"
 #import "YFCollectionSectionViewModel.h"
 #import "YFCollectionCellVMProtocol.h"

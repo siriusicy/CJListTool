@@ -8,7 +8,7 @@
 #import "YFDemoCollectionViewController.h"
 #import "CJDemoCommonHeader.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import <CHTCollectionViewWaterfallLayout/CHTCollectionViewWaterfallLayout.h>
+#import "CHTCollectionViewWaterfallLayout.h"
 #import "YFMVVMCollectionViewTool.h"
 #import "YFDemoCollectionViewModel.h"
 #import "YFDemoCollectionCell_1.h"

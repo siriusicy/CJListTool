@@ -8,6 +8,6 @@ pod 'MJRefresh'
 pod 'Masonry'
 pod 'ReactiveCocoa', '2.5'
 pod 'YYModel'
-pod 'CHTCollectionViewWaterfallLayout/ObjC'
+#pod 'CHTCollectionViewWaterfallLayout/ObjC'
 
 end

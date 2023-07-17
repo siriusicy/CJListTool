@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1273BC15B48FC5707EC04E74 /* libPods-CJListTool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDA1065A78ABEED5BD7CAE2 /* libPods-CJListTool.a */; };
+		84E19D992A65217000583B0E /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E19D972A65217000583B0E /* CHTCollectionViewWaterfallLayout.m */; };
 		8C26370828BA1D1D00001F05 /* YFCellBottomLineInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2636CD28BA1D1D00001F05 /* YFCellBottomLineInfoModel.m */; };
 		8C26370928BA1D1D00001F05 /* UITableViewCell+BottomLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2636CE28BA1D1D00001F05 /* UITableViewCell+BottomLine.m */; };
 		8C26370A28BA1D1D00001F05 /* UICollectionViewCell+BottomLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2636D028BA1D1D00001F05 /* UICollectionViewCell+BottomLine.m */; };
@@ -45,6 +46,8 @@
 
 /* Begin PBXFileReference section */
 		58C0CF221A352B9DFA9BB120 /* Pods-CJListTool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CJListTool.debug.xcconfig"; path = "Target Support Files/Pods-CJListTool/Pods-CJListTool.debug.xcconfig"; sourceTree = "<group>"; };
+		84E19D972A65217000583B0E /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
+		84E19D982A65217000583B0E /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
 		8C2636CB28BA1D1D00001F05 /* UITableViewCell+BottomLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+BottomLine.h"; sourceTree = "<group>"; };
 		8C2636CC28BA1D1D00001F05 /* UICollectionViewCell+BottomLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewCell+BottomLine.h"; sourceTree = "<group>"; };
 		8C2636CD28BA1D1D00001F05 /* YFCellBottomLineInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFCellBottomLineInfoModel.m; sourceTree = "<group>"; };
@@ -143,6 +146,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		84E19D962A65217000583B0E /* WaterFallLayout */ = {
+			isa = PBXGroup;
+			children = (
+				84E19D982A65217000583B0E /* CHTCollectionViewWaterfallLayout.h */,
+				84E19D972A65217000583B0E /* CHTCollectionViewWaterfallLayout.m */,
+			);
+			path = WaterFallLayout;
+			sourceTree = "<group>";
+		};
 		8C2636CA28BA1D1D00001F05 /* BottomLine */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,11 +214,11 @@
 			isa = PBXGroup;
 			children = (
 				8C2636E928BA1D1D00001F05 /* Demo */,
-				8C2636FE28BA1D1D00001F05 /* YFMVVMCollectionViewTool.h */,
-				8C2636FF28BA1D1D00001F05 /* YFCollectionSectionViewModel.m */,
 				8C26370028BA1D1D00001F05 /* Protocol */,
-				8C26370628BA1D1D00001F05 /* YFMVVMCollectionViewTool.m */,
 				8C26370728BA1D1D00001F05 /* YFCollectionSectionViewModel.h */,
+				8C2636FF28BA1D1D00001F05 /* YFCollectionSectionViewModel.m */,
+				8C2636FE28BA1D1D00001F05 /* YFMVVMCollectionViewTool.h */,
+				8C26370628BA1D1D00001F05 /* YFMVVMCollectionViewTool.m */,
 			);
 			path = CollectionViewTool;
 			sourceTree = "<group>";
@@ -253,6 +265,7 @@
 		8C71C48228B09BC000A7D092 /* YFListTool */ = {
 			isa = PBXGroup;
 			children = (
+				84E19D962A65217000583B0E /* WaterFallLayout */,
 				F5974D962A2DCD2A008D30B1 /* Empty */,
 				8C2636CA28BA1D1D00001F05 /* BottomLine */,
 				8C2636E828BA1D1D00001F05 /* CollectionViewTool */,
@@ -450,6 +463,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E19D992A65217000583B0E /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				8C26370928BA1D1D00001F05 /* UITableViewCell+BottomLine.m in Sources */,
 				8C26371328BA1D1D00001F05 /* YFDemoCollectionCell_2ViewModel.m in Sources */,
 				8C26371028BA1D1D00001F05 /* YFDemoTableCell_1ViewModel.m in Sources */,

@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CHTCollectionViewWaterfallLayout/CHTCollectionViewWaterfallLayout.h>
+#import "CHTCollectionViewWaterfallLayout.h"
 #import "YFCollectionVCViewModelProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
