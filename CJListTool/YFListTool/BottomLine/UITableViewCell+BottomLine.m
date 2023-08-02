@@ -11,7 +11,7 @@
 
 @interface UITableViewCell ()
 
-@property (nonatomic, strong, readwrite) UIView *bottomLineView;
+@property (nonatomic, strong, readwrite) UIView *yf_bottomLineView;
 
 @end
 
@@ -30,8 +30,8 @@
 - (void)yf_layoutSubviews {
     [self yf_layoutSubviews];
     
-    if ([self.bottomLineView isDescendantOfView:self.contentView]) {
-        [self.contentView bringSubviewToFront:self.bottomLineView];
+    if ([self.yf_bottomLineView isDescendantOfView:self.contentView]) {
+        [self.contentView bringSubviewToFront:self.yf_bottomLineView];
     }
 }
 
@@ -55,23 +55,23 @@
 #pragma mark -  private
 
 - (void)updateBottomLineView {
-    self.bottomLineView.hidden = !self.showBottomLine;
-    self.bottomLineView.backgroundColor = self.bottomLineColor;
+    self.yf_bottomLineView.hidden = !self.showBottomLine;
+    self.yf_bottomLineView.backgroundColor = self.bottomLineColor;
     
-    if (self.bottomLineView.hidden) {
+    if (self.yf_bottomLineView.hidden) {
         return;
     }
     
-    if (![self.bottomLineView isDescendantOfView:self.contentView]) {
-        [self.contentView addSubview:self.bottomLineView];
-        [self.bottomLineView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    if (![self.yf_bottomLineView isDescendantOfView:self.contentView]) {
+        [self.contentView addSubview:self.yf_bottomLineView];
+        [self.yf_bottomLineView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.bottomLineLeft);
             make.right.mas_equalTo(-fabs(self.bottomLineRight));
             make.bottom.mas_equalTo(0);
             make.height.mas_equalTo(self.bottomLineHeight);
         }];
     } else {
-        [self.bottomLineView mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.yf_bottomLineView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.bottomLineLeft);
             make.right.mas_equalTo(-fabs(self.bottomLineRight));
             make.bottom.mas_equalTo(0);
@@ -120,23 +120,23 @@
 //
 - (void)setBottomLineColor:(UIColor *)bottomLineColor {
     objc_setAssociatedObject(self, @selector(bottomLineColor), bottomLineColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    self.bottomLineView.backgroundColor = bottomLineColor;
+    self.yf_bottomLineView.backgroundColor = bottomLineColor;
 }
 - (UIColor *)bottomLineColor {
     UIColor *color = objc_getAssociatedObject(self, @selector(bottomLineColor));
     return color;
 }
 //
-- (void)setBottomLineView:(UIView *)bottomLineView{
-    objc_setAssociatedObject(self, @selector(bottomLineView), bottomLineView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setYf_bottomLineView:(UIView *)bottomLineView{
+    objc_setAssociatedObject(self, @selector(yf_bottomLineView), bottomLineView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-- (UIView *)bottomLineView{
-    UIView * view = objc_getAssociatedObject(self , @selector(bottomLineView));
+- (UIView *)yf_bottomLineView{
+    UIView * view = objc_getAssociatedObject(self , @selector(yf_bottomLineView));
     if (!view) {
         view = [[UIView alloc] init];
         view.backgroundColor = [UIColor grayColor];
         view.hidden = YES;
-        self.bottomLineView = view;
+        self.yf_bottomLineView = view;
     }
     return view;
 }

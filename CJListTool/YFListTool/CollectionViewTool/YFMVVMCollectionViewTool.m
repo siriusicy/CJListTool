@@ -43,6 +43,10 @@
         collectionView.delegate = self;
         collectionView.dataSource = self;
 
+        if (@available(iOS 11.0, *)) {
+            collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+
         self.collectionView = collectionView;
         self.viewModel = viewModel;
     }

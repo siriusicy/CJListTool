@@ -23,17 +23,17 @@
 
 #pragma mark -  方法交换
 #import <objc/runtime.h>
-static inline void yf_swizzled_instanceMethod(SEL originalSelector, SEL swizzledSelector, Class class) {
-    Method originalMethod = class_getInstanceMethod(class, originalSelector);
-    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+static inline void yf_swizzled_instanceMethod(SEL originalSelector, SEL swizzledSelector, Class inClass) {
+    Method originalMethod = class_getInstanceMethod(inClass, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(inClass, swizzledSelector);
     BOOL didAddMethod =
-    class_addMethod(class,
+    class_addMethod(inClass,
                     originalSelector,
                     method_getImplementation(swizzledMethod),
                     method_getTypeEncoding(swizzledMethod));
     
     if (didAddMethod) {
-        class_replaceMethod(class,
+        class_replaceMethod(inClass,
                             swizzledSelector,
                             method_getImplementation(originalMethod),
                             method_getTypeEncoding(originalMethod));

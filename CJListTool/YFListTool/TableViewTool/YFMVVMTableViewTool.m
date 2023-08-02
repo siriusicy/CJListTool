@@ -43,6 +43,9 @@
         if (@available(iOS 11.0, *)) {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         }
+        if (@available(iOS 15.0, *)) {
+            tableView.sectionHeaderTopPadding = 0;
+        }
         self.tableView = tableView;
         
         self.viewModel = viewModel;

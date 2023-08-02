@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) UIColor *bottomLineColor;
 
-@property (nonatomic ,strong ,readonly) UIView *bottomLineView;
+@property (nonatomic ,strong ,readonly) UIView *yf_bottomLineView;
 
 /// 传空会重置信息
 - (void)yf_decorateWithBottomInfo:(nullable YFCellBottomLineInfoModel *)info;
