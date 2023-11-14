@@ -10,7 +10,7 @@
 
 @implementation YFTableSectionViewModel
 
-- (NSMutableArray<id<YFTableCellVMProtocol>> *)listDataSource {
+- (NSMutableArray<NSObject<YFTableCellVMProtocol> *> *)listDataSource {
     if (_listDataSource == nil) {
         _listDataSource = [NSMutableArray array];
     }

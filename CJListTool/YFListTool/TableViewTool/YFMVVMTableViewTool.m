@@ -96,8 +96,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    id<YFTableCellVMProtocol> cellViewModel = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
-    id<YFTableCellProtocol> cell = [tableView dequeueReusableCellWithIdentifier:[cellViewModel yf_cellIdentity]];
+    NSObject<YFTableCellVMProtocol> *cellViewModel = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
+    UITableViewCell<YFTableCellProtocol> *cell = [tableView dequeueReusableCellWithIdentifier:[cellViewModel yf_cellIdentity]];
     if (cell == nil) {
         cell = [[[cellViewModel yf_cellClass] alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[cellViewModel yf_cellIdentity]];
     }
@@ -108,7 +108,7 @@
         [cell updateCellWithViewModel:cellViewModel];
     }
 
-    return (UITableViewCell *)cell;
+    return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -123,7 +123,7 @@
 
 #pragma mark -- UITableViewDelegate
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    id<YFTableCellVMProtocol> cellViewModel = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
+    NSObject<YFTableCellVMProtocol> *cellViewModel = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
     
     if ([cellViewModel respondsToSelector:@selector(bottomLineInfo)]) {
         [cell yf_decorateWithBottomInfo:[cellViewModel bottomLineInfo]];
@@ -145,7 +145,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     YFTableSectionViewModel *model = self.viewModel.sectionDataSource[indexPath.section];
-    id<YFTableCellVMProtocol> cellViewModel = model.listDataSource[indexPath.row];
+    NSObject<YFTableCellVMProtocol> *cellViewModel = model.listDataSource[indexPath.row];
     return [cellViewModel yf_cellHeight];
 }
 
@@ -178,7 +178,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    id<YFTableCellVMProtocol> cellViewModel = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
+    NSObject<YFTableCellVMProtocol> *cellViewModel = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
     if ([self.delegate respondsToSelector:@selector(tableView:didSelectCellViewModel:indexPath:)]) {
         [self.delegate tableView:tableView didSelectCellViewModel:cellViewModel indexPath:indexPath];
     }

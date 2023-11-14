@@ -59,14 +59,14 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.delegate &&
         [self.delegate respondsToSelector:@selector(collectionView:didSelectCellViewModel:indexPath:)]) {
-        id<YFCollectionCellVMProtocol> cellVM = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
+        NSObject<YFCollectionCellVMProtocol> *cellVM = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
         [self.delegate collectionView:collectionView didSelectCellViewModel:cellVM indexPath:indexPath];
     }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    id<YFCollectionCellVMProtocol> cellVM = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
+    NSObject<YFCollectionCellVMProtocol> *cellVM = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
     if ([cellVM respondsToSelector:@selector(bottomLineInfo)]) {
         [cell yf_decorateWithBottomInfo:[cellVM bottomLineInfo]];
     } else {
@@ -114,7 +114,7 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    id<YFCollectionCellVMProtocol> cellVM = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
+    NSObject<YFCollectionCellVMProtocol> *cellVM = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
 
     ///
     NSString *finalCellId = [NSString stringWithFormat:@"%p_%@", collectionView , [cellVM yf_cellIdentity]];
@@ -123,7 +123,7 @@
         [collectionView registerClass:[cellVM yf_cellClass] forCellWithReuseIdentifier:finalCellId];
     }
     //
-    id<YFCollectionCellProtocol> cell = [collectionView dequeueReusableCellWithReuseIdentifier:finalCellId forIndexPath:indexPath];
+    UICollectionViewCell<YFCollectionCellProtocol> *cell = [collectionView dequeueReusableCellWithReuseIdentifier:finalCellId forIndexPath:indexPath];
     
     if ([cell respondsToSelector:@selector(updateCellDelegate:)]) {
         [cell updateCellDelegate:self.viewModel.cellDelegate];
@@ -133,7 +133,7 @@
         [cell updateCellWithViewModel:cellVM];
     }
 
-    return (UICollectionViewCell *)cell;
+    return cell;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
@@ -157,16 +157,16 @@
         [collectionView registerClass:[headerFooterVM yf_reusableViewClass] forSupplementaryViewOfKind:kind withReuseIdentifier:finalViewId];
     }
     
-    id<YFCollectionHeaderFooterProtocol> headerFooterView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:finalViewId forIndexPath:indexPath];
+    UICollectionReusableView<YFCollectionHeaderFooterProtocol> *headerFooterView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:finalViewId forIndexPath:indexPath];
     [headerFooterView updateViewWithViewModel:headerFooterVM];
     
-    return (UICollectionReusableView *)headerFooterView;
+    return headerFooterView;
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    id<YFCollectionCellVMProtocol> cellVM = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
+    NSObject<YFCollectionCellVMProtocol> *cellVM = self.viewModel.sectionDataSource[indexPath.section].listDataSource[indexPath.row];
     return [cellVM yf_cellSize];
 }
 

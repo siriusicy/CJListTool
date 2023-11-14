@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) UIEdgeInsets sectionInsets; ///< default UIEdgeInsetsZero
 @property (nonatomic, strong) id<YFCollectionHeaderFooterVMProtocol> sectionHeaderViewModel;
 @property (nonatomic, strong) id<YFCollectionHeaderFooterVMProtocol> sectionFooterViewModel;
-@property (nonatomic, strong) NSMutableArray<id<YFCollectionCellVMProtocol>> *listDataSource;
+@property (nonatomic, strong) NSMutableArray<NSObject<YFCollectionCellVMProtocol> *> *listDataSource;
 
 @property (nonatomic, assign) CGFloat minimumLineSpacing; ///< 行间距
 // 以下为瀑布流属性

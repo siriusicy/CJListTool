@@ -19,7 +19,7 @@
     return self;
 }
 
-- (NSMutableArray<id<YFCollectionCellVMProtocol>> *)listDataSource {
+- (NSMutableArray<NSObject<YFCollectionCellVMProtocol> *> *)listDataSource {
     if (!_listDataSource) {
         _listDataSource = [NSMutableArray array];
     }

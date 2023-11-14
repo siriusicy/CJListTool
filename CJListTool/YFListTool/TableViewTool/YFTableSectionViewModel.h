@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIView *sectionFootView;
 
-@property (nonatomic, strong) NSMutableArray<id<YFTableCellVMProtocol>> *listDataSource;
+@property (nonatomic, strong) NSMutableArray<NSObject<YFTableCellVMProtocol> *> *listDataSource;
 
 @end
 

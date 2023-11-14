@@ -17,7 +17,7 @@
 @interface YFDemoCollectionViewModel ()
 
 @property (nonatomic, strong) NSNumber *xxId;
-@property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableArray<NSObject<YFCollectionCellVMProtocol> *> *dataArray;
 
 @end
 

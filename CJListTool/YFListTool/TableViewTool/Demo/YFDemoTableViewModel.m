@@ -13,7 +13,7 @@
 @interface YFDemoTableViewModel ()
 
 @property (nonatomic, strong) NSNumber *xxId;
-@property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableArray<NSObject<YFTableCellVMProtocol> *> *dataArray;
 
 @end
 
@@ -126,7 +126,7 @@
     return _requestCompleteSignal;
 }
 
-- (NSMutableArray *)dataArray {
+- (NSMutableArray<NSObject<YFTableCellVMProtocol> *> *)dataArray  {
     if (_dataArray == nil) {
         _dataArray = [NSMutableArray array];
     }
